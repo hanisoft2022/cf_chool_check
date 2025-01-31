@@ -1,7 +1,7 @@
 import 'package:chool_check/home/fragment/f_custom_app_bar.dart';
 import 'package:chool_check/home/provider/location_provider.dart';
 import 'package:chool_check/home/fragment/f_body.dart';
-import 'package:chool_check/home/fragment/f_footer.dart';
+import 'package:chool_check/home/fragment/footer/f_footer.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,7 +14,6 @@ class SHome extends ConsumerStatefulWidget {
 }
 
 class _SHomeState extends ConsumerState<SHome> {
-  // initState에서 실시간 사용자 위치 반영 메서드 초기화
   @override
   void initState() {
     super.initState();

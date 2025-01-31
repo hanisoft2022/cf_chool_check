@@ -8,15 +8,15 @@ class FBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final mapState = ref.watch(mapProvider);
     final mapNotifier = ref.read(mapProvider.notifier);
+    final MapState mapState = ref.watch(mapProvider);
 
     return GoogleMap(
-      onMapCreated: mapNotifier.onMapCreated,
-      initialCameraPosition: mapState.initialPosition,
       myLocationEnabled: true,
       myLocationButtonEnabled: false,
       zoomControlsEnabled: false,
+      onMapCreated: mapNotifier.onMapCreated,
+      initialCameraPosition: mapState.initialPosition,
       markers: mapState.markers,
       circles: mapState.circles,
     );

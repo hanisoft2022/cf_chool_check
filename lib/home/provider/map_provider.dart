@@ -29,9 +29,7 @@ class MapState {
   }
 }
 
-final mapProvider = StateNotifierProvider<MapNotifier, MapState>((ref) {
-  return MapNotifier(ref);
-});
+final mapProvider = StateNotifierProvider<MapNotifier, MapState>((ref) => MapNotifier(ref));
 
 class MapNotifier extends StateNotifier<MapState> {
   final Ref ref;
@@ -49,34 +47,15 @@ class MapNotifier extends StateNotifier<MapState> {
         center: markers['원종초등학교']!.position,
         radius: 100,
         strokeWidth: 1,
-        fillColor: locationState.canChoolCheck ? Colors.blue.withOpacity(0.5) : Colors.red.withOpacity(0.5),
-        strokeColor: locationState.canChoolCheck ? Colors.blue.withOpacity(0.5) : Colors.red.withOpacity(0.5),
+        fillColor: locationState.canChoolCheck ? Colors.blue.withAlpha(128) : Colors.red.withAlpha(128),
+        strokeColor: locationState.canChoolCheck ? Colors.blue.withAlpha(128) : Colors.red.withAlpha(128),
       ),
     };
 
-    state = state.copyWith(
-      markers: {markers['원종초등학교']!},
-      circles: circles,
-    );
+    state = state.copyWith(markers: {markers['원종초등학교']!}, circles: circles);
   }
 
   void onMapCreated(GoogleMapController controller) {
     ref.read(mapControllerProvider.notifier).state = controller;
-  }
-
-  Future<void> moveToCurrentLocation() async {
-    final locationState = ref.read(locationProvider);
-    final controller = ref.read(mapControllerProvider);
-
-    if (controller != null && locationState.position != null) {
-      controller.animateCamera(
-        CameraUpdate.newLatLng(
-          LatLng(
-            locationState.position!.latitude,
-            locationState.position!.longitude,
-          ),
-        ),
-      );
-    }
   }
 }
